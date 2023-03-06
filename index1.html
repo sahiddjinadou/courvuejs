@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <user></user>
+    <message type="succes" :message="message" header="Attention" v-if="alert" @close="hideAlert"></message>
+    <button v-on:click="showAlert" v-if="!alert">Alerter</button>
+    <counter></counter>
+    <counter :start="start"></counter>
+    <div>{{ message | opp('$','$') }}</div>
+    <p v-if="alert"> hjgjhghj </p>
+    <p v-else> {{ fullName }} !!!!</p>
+
+    <input type="checkbox" v-model="succes">
+    <input type="text" v-model="message">{{ message }}
+    <div :class="cls">
+        madiv test
+    </div>
+    <p>
+        nom:{{nom}}<br>
+        prenom:{{prenom}}<br>
+        Nom complet :<input type="text "  v-model="fnom"/>
+    </p>
+    <div @keydown.space="click1" style="border:1px solid;">
+        <div @click="click2" style="width:2rem; border: red 1px solid; margin: 0 auto; ">click</div>
+    </div>
+
+    <div>
+        <label for="form">Veuillez entrer le bon mot:</label>
+        <input type="text" name="form"  v-model="userword" @input="Vuser()">
+        <!-- <button type="submit" @click="Vuser()">Valider</button> -->
+        <p :class="ds" v-if="visible">{{ resultat }}</p>
+        <!-- <p :class="ds" v-else>{{ resultat }}</p> -->
+    </div>
+    
+</body>
+</html>

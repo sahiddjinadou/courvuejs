@@ -1,0 +1,119 @@
+ <div>
+        <div></div>
+    </div>
+    <div id="app">
+        {{ message }}
+        <a v-bind:href="link" :title="titre">{{ lienscontent}}</a>
+        <!-- <p v-if="succes"> succès </p>
+        <p v-else="succes"> 
+            <p v-if="echec">ça n'a pas marché .
+                <div v-on:click="close">*</div>
+            </p> -->
+            <!-- <p v-else="echec">ça n'a pas marché2 .</p> -->
+        <!-- </p> -->
+
+        <p v-show="succes"> Show</p>
+        <ul>
+            <li v-for="element in gens">{{element}}</li>
+        </ul>
+
+        <input type="checkbox" v-model="cls" :true-value="'succes'" :false-value="'echec'">
+        <div  :class="cls" >{{message}}</div>
+        <!-- <div  :style="style()" >{{message}}</div> -->
+    </div>
+
+
+
+    __________________________________________________________________________________________________________________________________
+
+
+    new Vue({
+        el : '#app',
+    
+        data: {
+            message : "bonjour tous le monde ",
+            link :"https://www.graphikart.com",
+            lienscontent : "grafikart",
+            titre : "site du dev",
+            succes : true,
+            echec : true,
+            gens : ["DAK","Pilote","Instrument de justice","bobl'eponge", "oloukina"],
+            contenue:"sahid",  
+            cls : 'succes',
+            demo:' red',
+    
+        },
+        methods:{
+            close:function(){
+                this.lienscontent ="c'est changer"
+            },
+            style : function (){
+                if(this.echec){
+                    return{background:'red'}
+                }else{
+                    return {background:'green'}
+                }
+            },
+            edit_person: function(){
+                this.gens.push('erik');
+                this.demo = "Yo le bro";
+            },
+        },
+            mounted : function() {
+                console.log('Bossor');
+            },
+            beforeCreate : function() {
+                console.log('Pilote');
+            },
+    })
+    notion de computed 
+    computed:{
+        fullName:{
+         get:function () {
+            console.log("cls called");     
+              return this.firstName+' ' +this.lastName
+           },
+           set : function(value){
+               console.log(value);
+               let part = value.split(' ');
+               this.firstName = part[0];
+               this.lastName = part[1];
+           }
+        },
+       },
+
+       //maniere globale pourla création d'une directive
+Vue.directive('sahid',{
+    bind:function(el,binding,vnode){
+        console.log(el , binding)
+        el.value = binding.value
+    }
+})
+let capitalized = function(value,prefix,suffix){
+    return prefix +value.toUpperCase() + suffix;
+}
+Vue.filter('reverse',function(value){
+    return value.split(' ').reverse().join(' ')
+})
+
+let vm = new Vue({
+   el: '#app',
+   filters:{capitalized},
+   data: {
+      fullName: 'graphikart formation ',
+      message:"one day",
+   },
+  methods : {
+    demo : function () {
+        console.log("demo1");
+    },
+    demo2:function(){
+        console.log("demo2")
+    },
+    demo3:function (){
+        console.log("demo3")
+    }
+  },
+
+
+})
